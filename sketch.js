@@ -4,16 +4,14 @@ const color2 = 220
 const minCircleSize = 40
 const maxCircleSize = 200
 const numCircles = 10
-// this is the state
-let toggle = false 
+// these are some things in the global state 
 let game, startButton
-let started = false
 
 function setup(){
     createCanvas(window.innerWidth, window.innerHeight)
     startButton = createButton('start')
     startButton.position(window.innerWidth/2 - 200, window.innerHeight/2 - 100)
-   startButton.size(400,200)
+    startButton.size(400,200)
     startButton.mousePressed(() => startGame(game))
     game = new Game(numCircles, startButton)
 
@@ -36,7 +34,7 @@ function draw(){
     
 }
 
-
+// not using this at the moment
 function mousePressed(){
     // if(!started){
     //     game.checkClick(mouseX, mouseY)
@@ -48,8 +46,6 @@ function mousePressed(){
 
 const startGame = (game) => {
     game.init()
-    game.started = true
-    game.overload = false
     startButton.hide()  
-    started = true  
+    
 }

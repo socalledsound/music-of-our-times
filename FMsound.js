@@ -1,4 +1,6 @@
 class FMsound{
+    // fm synthesis is a nice way to make pretty interesting sounds
+    // one oscillator modulates the frequency of another one
     constructor(size){
         this.freq1 = size
         console.log(this.freq1)
@@ -36,11 +38,12 @@ class FMsound{
     }
 
     update(size){    
-        // this.freq1 = (40000/size)
+        // modulates this sound with the size of the ball
+        // that this ball just collided with
         this.modFreq = size * 4
         this.playLength = size * 3
         this.osc1.freq(this.modFreq)
-        console.log('updateing sound', this.freq1)
+        console.log('updating sound', this.freq1)
         this.osc2.freq(this.freq1 * this.osc1)
     }
 }
