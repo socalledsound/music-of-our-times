@@ -1,5 +1,7 @@
 class CircleThing {
     constructor({x, y, size}){
+        // vectors are a way to store two related values in one variable
+        // they're actually more than that but that's probably enough on them for now
         this.position = createVector(x, y)
         this.size = size
         this.color= getRandomColor()
@@ -13,10 +15,12 @@ class CircleThing {
         this.sound = new FMsound(this.size)
     }
 
+    // for a while i had some acceleration stuff in here
     addForce(){
         console.log()   
     }
 
+    //and some friction, which is the opposite of acceleration
     addFriction(){
         //this.acceleration.mult(this.friction)
     }
@@ -25,6 +29,7 @@ class CircleThing {
 
     }
 
+    // check the edges and reverse if at the edge
     checkBoundaryCollision() {
         if (this.position.x > width - this.size/2) {
           this.position.x = width - this.size/2;
@@ -69,6 +74,8 @@ class CircleThing {
                 }   
     }
 
+    // this is some very cool trig that calculates new trajectories 
+    // for each ball after contact.  there are nice comments that aren't mine
     checkCollisionBorrowed(other) {
         // Get distances between the balls components
         let distanceVect = p5.Vector.sub(other.position, this.position);
@@ -166,9 +173,14 @@ class CircleThing {
 
     evolve(otherSize, otherColor){
         console.log(this.color, otherColor)
+        // this makes the colors move towards each other
         this.color = lerpColor(color(this.color), color(otherColor), 0.5)
+        // make the balls bigger after collision
+        // sometimes they get locked together as a result
         this.size +=0.5
         console.log('should update sound here')
+        // this combines the sounds of colliding balls 
+        // so that they each modulate each other
         this.sound.update(otherSize)
         if(this.size < 20){
             this.size = 0
